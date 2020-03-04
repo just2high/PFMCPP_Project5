@@ -226,13 +226,13 @@ bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
  new UDT 4:
  */
 
-struct tripPlan
+struct TripPlan
 {
     TopRopeRoute routeOne;
     Mountain mountain;
 
-    tripPlan() {}
-    ~tripPlan()
+    TripPlan() {}
+    ~TripPlan()
     {
         std::cout << "Trip planned!\n";
         mountain.constructMountain( 34.27 );
@@ -243,13 +243,13 @@ struct tripPlan
  new UDT 5:
  */
 
-struct climbPlan
+struct ClimbPlan
 {
     TopRopeRoute routeOne;
     Shoe shoe;
 
-    climbPlan() {}
-    ~climbPlan()
+    ClimbPlan() {}
+    ~ClimbPlan()
     {
         shoe.shoeInfo();
         std::cout << "Got my shoes for the climb!\n";
@@ -258,9 +258,9 @@ struct climbPlan
 
 int main()
 {
-    tripPlan march;
+    TripPlan march;
 
-    climbPlan routeOne;
+    ClimbPlan routeOne;
 
     std::cout << "good to go!" << std::endl;
 }
