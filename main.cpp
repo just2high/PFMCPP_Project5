@@ -86,7 +86,7 @@ struct TopRopeRoute
 {
     double wallAngle { 10 };
 
-//  TopRopeRoute(){}
+    TopRopeRoute(){}
     ~TopRopeRoute()
     {
         std::cout << "TopRopeRoute dstor\n";
@@ -140,7 +140,7 @@ struct Mountain
     int height { 15 };
     int routes { 20 };
 
-//    Mountain(){}
+    Mountain(){}
     ~Mountain()
     {
         std::cout << "Mountain dstor\n";
