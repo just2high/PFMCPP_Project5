@@ -176,7 +176,7 @@ void Mountain::constructMountain( double baseDiameter )
 
     std::cout << "The mountain takes up " << mountain << " ft^3 of space.\n";
 
-    mountainFeatures( wall, slab, mountain ); 
+//    mountainFeatures( wall, slab, mountain ); 
 }
 
 /*
@@ -226,12 +226,41 @@ bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
  new UDT 4:
  */
 
+struct tripPlan
+{
+    TopRopeRoute routeOne;
+    Mountain mountain;
+
+    tripPlan() {}
+    ~tripPlan()
+    {
+        std::cout << "Trip planned!\n";
+        mountain.constructMountain( 34.27 );
+    }
+};
 
 /*
  new UDT 5:
  */
 
+struct climbPlan
+{
+    TopRopeRoute routeOne;
+    Shoe shoe;
+
+    climbPlan() {}
+    ~climbPlan()
+    {
+        shoe.shoeInfo();
+        std::cout << "Got my shoes for the climb!\n";
+    }
+};
+
 int main()
 {
+    tripPlan march;
+
+    climbPlan routeOne;
+
     std::cout << "good to go!" << std::endl;
 }
