@@ -1,3 +1,6 @@
+#include <iostream>
+#include <math.h>
+
 /*
 Project 5: Part 1 / 4
  video Chapter 2 - Part 12 
@@ -30,16 +33,64 @@ Project 5: Part 1 / 4
  Wait for my code review.
  */
 
+//Required UDT for Copied UDT 1 to work
+
+struct BoulderProblem
+{
+    int problemGrade;
+    double wallAngle;
+    
+    BoulderProblem() : problemGrade( 3 ), wallAngle( 30 ) {}
+    ~BoulderProblem() 
+    {
+        std::cout << "BoulderProblem dstor\n";
+    }
+
+    struct Hold
+    {
+        int holdType { 2 };
+        double holdSize; 
+        double holdHeight;
+
+        Hold() : holdSize( 0.8 ), holdHeight( 1 ) {}
+        ~Hold() 
+        {
+            std::cout << "Hold dstor\n";
+        }
+        
+        void printHoldInfo()
+        {
+            std::cout << "Hold Type: " << holdType;
+            std::cout << "\nHold Size: " << holdSize;
+            std::cout << "\nHold Height: " << holdHeight;
+            std::cout << std::endl;
+        }
+    };
+
+    double calculateDifficulty( double ropeLength );
+
+    Hold crimp;
+};
+
+double BoulderProblem::calculateDifficulty( double ropeLength )
+{
+    std::cout << "Calculating difficulty for V" << problemGrade << " problem at a " << wallAngle << " degree incline.\n";
+    return ((problemGrade * crimp.holdType) / crimp.holdSize) - ropeLength;
+}
+
 /*
  copied UDT 1:
  */
-
 
 struct TopRopeRoute
 {
     double wallAngle { 10 };
 
 //  TopRopeRoute(){}
+    ~TopRopeRoute()
+    {
+        std::cout << "TopRopeRoute dstor\n";
+    }
 
     struct RouteGrade
     {
@@ -50,6 +101,11 @@ struct TopRopeRoute
         gradeNumber( 5.10 ), 
         gradeLetter( 100 ) // ascii letter 'd' 
         {}
+
+        ~RouteGrade()
+        {
+            std::cout << "RouteGrade dstor\n";
+        }
 
         void printGradeInfo()
         {
@@ -85,6 +141,10 @@ struct Mountain
     int routes { 20 };
 
 //    Mountain(){}
+    ~Mountain()
+    {
+        std::cout << "Mountain dstor\n";
+    }
 
     void mountainFeatures( TopRopeRoute face, BoulderProblem base, double mountain );
 
@@ -129,6 +189,11 @@ struct Shoe
 
     Shoe() : shoeSize( 8.5f ), isMale ( true ), isBoot ( false ), rubberType ( 3 ), agressiveness ( 1 ) {}
 
+    ~Shoe()
+    {
+        std::cout << "Shoe dstor\n";
+    }
+
     void shoeInfo()
     {
         std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
@@ -160,7 +225,6 @@ bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
  new UDT 5:
  */
 
-#include <iostream>
 int main()
 {
     std::cout << "good to go!" << std::endl;
