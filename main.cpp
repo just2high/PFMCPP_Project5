@@ -101,7 +101,7 @@ struct TopRopeRoute
         
         RouteGrade() : 
         gradeNumber( 5.10 ), 
-        gradeLetter( 100 ) // ascii letter 'd' 
+        gradeLetter( 'd' )
         {}
 
         ~RouteGrade()
@@ -128,7 +128,7 @@ void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
 
     std::cout << "The wall is at a " << wallAngle << " degree incline.\n";
 
-    for ( int i = moves; i > 0; i-- )  // already have a for loop
+    for ( int i = moves; i > 0; --i )  // already have a for loop
     {
          hold.holdHeight = ( wallHeight / moves ) * i;
          std::cout << "Hold height for move " << i << " is: " << hold.holdHeight << std::endl;
@@ -159,7 +159,7 @@ void Mountain::mountainFeatures(TopRopeRoute face, BoulderProblem base, double m
 {
     std::cout << "Mountain height is " << height << " feet and has " << routes << " routes\n";
 
-    for ( int i = this->routes; i > 0; i-- ) // already have a for loop
+    for ( int i = this->routes; i > 0; --i ) // already have a for loop
     {
         std::cout << "Route #" << i << std::endl;
         
