@@ -57,20 +57,22 @@ struct BoulderProblem
         {
             std::cout << "Hold dstor\n";
         }
-        
-        void printHoldInfo()
-        {
-            std::cout << "Hold Type: " << holdType;
-            std::cout << "\nHold Size: " << holdSize;
-            std::cout << "\nHold Height: " << holdHeight;
-            std::cout << std::endl;
-        }
+
+        void printHoldInfo();
     };
 
     double calculateDifficulty( double ropeLength );
 
     Hold crimp;
 };
+
+void BoulderProblem::Hold::printHoldInfo()
+{
+    std::cout << "Hold Type: " << holdType;
+    std::cout << "\nHold Size: " << holdSize;
+    std::cout << "\nHold Height: " << holdHeight;
+    std::cout << std::endl;
+}
 
 double BoulderProblem::calculateDifficulty( double ropeLength )
 {
@@ -107,16 +109,18 @@ struct TopRopeRoute
             std::cout << "RouteGrade dstor\n";
         }
 
-        void printGradeInfo()
-        {
-            std::cout << "Grade is: " << gradeNumber << gradeLetter << std::endl;
-        }
+        void printGradeInfo();
     };
 
     void buildRoute( int moves, double wallHeight );
 
     RouteGrade hard;
 };
+
+void TopRopeRoute::RouteGrade::printGradeInfo()
+{
+    std::cout << "Grade is: " << gradeNumber << gradeLetter << std::endl;
+}
 
 void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
 {
@@ -194,13 +198,15 @@ struct Shoe
         std::cout << "Shoe dstor\n";
     }
 
-    void shoeInfo()
-    {
-        std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
-    }
+    void shoeInfo();
 
     bool shoeFit( float painTolerance );
 };
+
+void Shoe::shoeInfo()
+{
+    std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
+}
 
 bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
 {    
