@@ -1,6 +1,6 @@
 /*
 Project 5: Part 1 / 4
- video Chapter 2 - Part 12
+ video Chapter 2 - Part 12 
 
  Create a branch named Part1
 
@@ -34,17 +34,127 @@ Project 5: Part 1 / 4
  copied UDT 1:
  */
 
+
+struct TopRopeRoute
+{
+    double wallAngle { 10 };
+
+//  TopRopeRoute(){}
+
+    struct RouteGrade
+    {
+        double gradeNumber;
+        char gradeLetter; 
+        
+        RouteGrade() : 
+        gradeNumber( 5.10 ), 
+        gradeLetter( 100 ) // ascii letter 'd' 
+        {}
+
+        void printGradeInfo()
+        {
+            std::cout << "Grade is: " << gradeNumber << gradeLetter << std::endl;
+        }
+    };
+
+    void buildRoute( int moves, double wallHeight );
+
+    RouteGrade hard;
+};
+
+void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
+{
+    BoulderProblem::Hold hold;
+
+    std::cout << "The wall is at a " << wallAngle << " degree incline.\n";
+
+    for ( int i = moves; i > 0; i-- )  // already have a for loop
+    {
+         hold.holdHeight = ( wallHeight / moves ) * i;
+         std::cout << "Hold height for move " << i << " is: " << hold.holdHeight << std::endl;
+    }
+}
+
 /*
  copied UDT 2:
  */
+
+struct Mountain 
+{
+    int height { 15 };
+    int routes { 20 };
+
+//    Mountain(){}
+
+    void mountainFeatures( TopRopeRoute face, BoulderProblem base, double mountain );
+
+    void constructMountain( double baseDiameter );
+};
+
+void Mountain::mountainFeatures(TopRopeRoute face, BoulderProblem base, double mountain )
+{
+    std::cout << "Mountain height is " << height << " feet and has " << routes << " routes\n";
+
+    for ( int i = this->routes; i > 0; i-- ) // already have a for loop
+    {
+        std::cout << "Route #" << i << std::endl;
+        
+        face.buildRoute( this->height, ( mountain + base.calculateDifficulty( 20.25 ) ) );
+    }
+}
+
+void Mountain::constructMountain( double baseDiameter )
+{
+    TopRopeRoute wall;
+    BoulderProblem slab;
+
+    double mountain = M_PI* pow( baseDiameter / 2, 2 ) * this->height;
+
+    std::cout << "The mountain takes up " << mountain << " ft^3 of space.\n";
+
+    mountainFeatures( wall, slab, mountain ); 
+}
 
 /*
  copied UDT 3:
  */
 
+struct Shoe
+{
+    float shoeSize;
+    bool isMale;
+    bool isBoot;
+    int rubberType;
+    int agressiveness;
+
+    Shoe() : shoeSize( 8.5f ), isMale ( true ), isBoot ( false ), rubberType ( 3 ), agressiveness ( 1 ) {}
+
+    void shoeInfo()
+    {
+        std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
+    }
+
+    bool shoeFit( float painTolerance );
+};
+
+bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
+{    
+    while ( painTolerance <= shoeSize )
+    {
+        std::cout << "The size " << shoeSize << " shoe doesn't fit!\n";
+
+        shoeSize = shoeSize - 0.5f;
+    }
+
+    std::cout << "The size " << shoeSize << " shoe fits!\n";
+
+    return true;
+}
+
 /*
  new UDT 4:
  */
+
 
 /*
  new UDT 5:
