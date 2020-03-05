@@ -89,9 +89,12 @@ struct BoulderProblem
         }
 
         void printHoldInfo();
+
+        void printHoldInfo_();     // new function
     };
 
     double calculateDifficulty( double ropeLength );
+    void difficultyInfo();
 
     Hold crimp;
 };
@@ -104,10 +107,23 @@ void BoulderProblem::Hold::printHoldInfo()
     std::cout << std::endl;
 }
 
+void BoulderProblem::Hold::printHoldInfo_()     // new function
+{
+    std::cout << "Hold Type: " << this->holdType;
+    std::cout << "\nHold Size: " << this->holdSize;
+    std::cout << "\nHold Height: " << this->holdHeight;
+    std::cout << std::endl;
+}
+
 double BoulderProblem::calculateDifficulty( double ropeLength )
 {
     std::cout << "Calculating difficulty for V" << problemGrade << " problem at a " << wallAngle << " degree incline.\n";
     return ((problemGrade * crimp.holdType) / crimp.holdSize) - ropeLength;
+}
+
+void BoulderProblem::difficultyInfo()     // new function
+{
+    std::cout << "The grade is V" << this->problemGrade << " and the wall angle is at a " << this->wallAngle << " degree incline.\n";
 }
 
 /*
@@ -140,6 +156,7 @@ struct TopRopeRoute
         }
 
         void printGradeInfo();
+        void printGradeInfo_();     // new function
     };
 
     void buildRoute( int moves, double wallHeight );
@@ -150,6 +167,11 @@ struct TopRopeRoute
 void TopRopeRoute::RouteGrade::printGradeInfo()
 {
     std::cout << "Grade is: " << gradeNumber << gradeLetter << std::endl;
+}
+
+void TopRopeRoute::RouteGrade::printGradeInfo_()    // new function
+{
+    std::cout << "Grade is: " << this->gradeNumber << this->gradeLetter << std::endl;
 }
 
 void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
@@ -180,6 +202,8 @@ struct Mountain
         std::cout << "Mountain dstor\n";
     }
 
+    void printMountainInfo();     // new function
+
     void mountainFeatures( TopRopeRoute face, BoulderProblem base, double mountain );
 
     void constructMountain( double baseDiameter );
@@ -195,6 +219,11 @@ void Mountain::mountainFeatures(TopRopeRoute face, BoulderProblem base, double m
         
         face.buildRoute( this->height, ( mountain + base.calculateDifficulty( 20.25 ) ) );
     }
+}
+
+void Mountain::printMountainInfo()  // new function
+{
+    std::cout << "Mountain height is " << this->height << " feet and has " << this->routes << " routes\n";
 }
 
 void Mountain::constructMountain( double baseDiameter )
@@ -230,12 +259,20 @@ struct Shoe
 
     void shoeInfo();
 
+    void shoeInfo_();   // new function
+
     bool shoeFit( float painTolerance );
 };
 
 void Shoe::shoeInfo()
 {
     std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
+}
+
+void Shoe::shoeInfo_()  // new function
+{
+        std::cout << "This size " << this->shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << this->rubberType << " rubber.\n";
+        std::cout << "The aggressiveness is " << this->agressiveness << std::endl;
 }
 
 bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
@@ -291,6 +328,24 @@ int main()
     TripPlan march;
 
     ClimbPlan routeOne;
+
+// new functions called below
+
+    BoulderProblem::Hold pinch;
+    
+    pinch.printHoldInfo_();
+
+    TopRopeRoute::RouteGrade medium;
+
+    medium.printGradeInfo_();
+
+    Mountain big;
+
+    big.printMountainInfo();
+
+    Shoe tenaya;
+
+    tenaya.shoeInfo_();
 
     std::cout << "good to go!" << std::endl;
 }
