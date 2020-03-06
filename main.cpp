@@ -323,29 +323,48 @@ struct ClimbPlan
     }
 };
 
+void divider()
+{
+std::cout << "\n=============================\n\n";
+}
+
 int main()
 {
     TripPlan march;
 
     ClimbPlan routeOne;
 
-// new functions called below
+    divider();
 
     BoulderProblem::Hold pinch;
     
-    pinch.printHoldInfo_();
+    std::cout << "Accessing member variables of pinch hold...\n";
+    std::cout << "Hold Type: " << pinch.holdType;
+    std::cout << "\nHold Size: " << pinch.holdSize;
+    std::cout << "\nHold Height: " << pinch.holdHeight;
+    std::cout << std::endl;
+
+    divider();
 
     TopRopeRoute::RouteGrade medium;
 
-    medium.printGradeInfo_();
+    std::cout << "Grade of this medium Top Rope Route is: " << medium.gradeNumber << medium.gradeLetter << std::endl;
 
-    Mountain big;
+    divider();
 
-    big.printMountainInfo();
+    Mountain Jumbo;
+    
+    std::cout << "Mount Jumbo has a height of " << Jumbo.height << " feet and has " << Jumbo.routes << " routes\n";
+
+    divider();
 
     Shoe tenaya;
 
-    tenaya.shoeInfo_();
+    std::cout << "Tenaya is a great shoe.\n";
+    std::cout << "This size " << tenaya.shoeSize << ( tenaya.isBoot ? " boot" : " shoe" ) << " has type " << tenaya.rubberType << " rubber.\n";
+    std::cout << "It's got an aggressiveness value of " << tenaya.agressiveness << ".\n";
+
+    divider();
 
     std::cout << "good to go!" << std::endl;
 }
