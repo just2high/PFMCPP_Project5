@@ -344,17 +344,23 @@ int main()
     std::cout << "\nHold Height: " << pinch.holdHeight;
     std::cout << std::endl;
 
+    pinch.printHoldInfo_();
+
     divider();
 
     TopRopeRoute::RouteGrade medium;
 
     std::cout << "Grade of this medium Top Rope Route is: " << medium.gradeNumber << medium.gradeLetter << std::endl;
 
+    medium.printGradeInfo_();
+
     divider();
 
     Mountain Jumbo;
     
     std::cout << "Mount Jumbo has a height of " << Jumbo.height << " feet and has " << Jumbo.routes << " routes\n";
+
+    Jumbo.printMountainInfo();
 
     divider();
 
@@ -363,6 +369,8 @@ int main()
     std::cout << "Tenaya is a great shoe.\n";
     std::cout << "This size " << tenaya.shoeSize << ( tenaya.isBoot ? " boot" : " shoe" ) << " has type " << tenaya.rubberType << " rubber.\n";
     std::cout << "It's got an aggressiveness value of " << tenaya.agressiveness << ".\n";
+
+    tenaya.shoeInfo_();
 
     divider();
 
