@@ -89,18 +89,21 @@ struct BoulderProblem
         }
 
         void printHoldInfo();
+
+        void printHoldInfo_();     // new function
     };
 
     double calculateDifficulty( double ropeLength );
+    void difficultyInfo();
 
     Hold crimp;
 };
 
 void BoulderProblem::Hold::printHoldInfo()
 {
-    std::cout << "Hold Type: " << holdType;
-    std::cout << "\nHold Size: " << holdSize;
-    std::cout << "\nHold Height: " << holdHeight;
+    std::cout << "Hold Type: " << this->holdType;
+    std::cout << "\nHold Size: " << this->holdSize;
+    std::cout << "\nHold Height: " << this->holdHeight;
     std::cout << std::endl;
 }
 
@@ -108,6 +111,11 @@ double BoulderProblem::calculateDifficulty( double ropeLength )
 {
     std::cout << "Calculating difficulty for V" << problemGrade << " problem at a " << wallAngle << " degree incline.\n";
     return ((problemGrade * crimp.holdType) / crimp.holdSize) - ropeLength;
+}
+
+void BoulderProblem::difficultyInfo()     // new function
+{
+    std::cout << "The grade is V" << this->problemGrade << " and the wall angle is at a " << this->wallAngle << " degree incline.\n";
 }
 
 /*
@@ -140,6 +148,7 @@ struct TopRopeRoute
         }
 
         void printGradeInfo();
+        void printGradeInfo_();     // new function
     };
 
     void buildRoute( int moves, double wallHeight );
@@ -149,7 +158,7 @@ struct TopRopeRoute
 
 void TopRopeRoute::RouteGrade::printGradeInfo()
 {
-    std::cout << "Grade is: " << gradeNumber << gradeLetter << std::endl;
+    std::cout << "Grade is: " << this->gradeNumber << this->gradeLetter << std::endl;
 }
 
 void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
@@ -180,6 +189,8 @@ struct Mountain
         std::cout << "Mountain dstor\n";
     }
 
+    void printMountainInfo();     // new function
+
     void mountainFeatures( TopRopeRoute face, BoulderProblem base, double mountain );
 
     void constructMountain( double baseDiameter );
@@ -195,6 +206,11 @@ void Mountain::mountainFeatures(TopRopeRoute face, BoulderProblem base, double m
         
         face.buildRoute( this->height, ( mountain + base.calculateDifficulty( 20.25 ) ) );
     }
+}
+
+void Mountain::printMountainInfo()  // new function
+{
+    std::cout << "Mountain height is " << this->height << " feet and has " << this->routes << " routes\n";
 }
 
 void Mountain::constructMountain( double baseDiameter )
@@ -230,12 +246,15 @@ struct Shoe
 
     void shoeInfo();
 
+    void shoeInfo_();   // new function
+
     bool shoeFit( float painTolerance );
 };
 
 void Shoe::shoeInfo()
-{
-    std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
+{        
+     std::cout << "This size " << this->shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << this->rubberType << " rubber.\n";
+        std::cout << "The aggressiveness is " << this->agressiveness << std::endl;
 }
 
 bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
@@ -286,11 +305,56 @@ struct ClimbPlan
     }
 };
 
+void divider()
+{
+    std::cout << "\n=============================\n\n";
+}
+
 int main()
 {
     TripPlan march;
 
     ClimbPlan routeOne;
+
+    divider();
+
+    BoulderProblem::Hold pinch;
+    
+    std::cout << "Accessing member variables of pinch hold...\n";
+    std::cout << "Hold Type: " << pinch.holdType;
+    std::cout << "\nHold Size: " << pinch.holdSize;
+    std::cout << "\nHold Height: " << pinch.holdHeight;
+    std::cout << std::endl;
+
+    pinch.printHoldInfo();
+
+    divider();
+
+    TopRopeRoute::RouteGrade medium;
+
+    std::cout << "Grade of this medium Top Rope Route is: " << medium.gradeNumber << medium.gradeLetter << std::endl;
+
+    medium.printGradeInfo();
+
+    divider();
+
+    Mountain Jumbo;
+    
+    std::cout << "Mount Jumbo has a height of " << Jumbo.height << " feet and has " << Jumbo.routes << " routes\n";
+
+    Jumbo.printMountainInfo();
+
+    divider();
+
+    Shoe tenaya;
+
+    std::cout << "Tenaya is a great shoe.\n";
+    std::cout << "This size " << tenaya.shoeSize << ( tenaya.isBoot ? " boot" : " shoe" ) << " has type " << tenaya.rubberType << " rubber.\n";
+    std::cout << "It's got an aggressiveness value of " << tenaya.agressiveness << ".\n";
+
+    tenaya.shoeInfo();
+
+    divider();
 
     std::cout << "good to go!" << std::endl;
 }
