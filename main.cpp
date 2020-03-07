@@ -101,14 +101,6 @@ struct BoulderProblem
 
 void BoulderProblem::Hold::printHoldInfo()
 {
-    std::cout << "Hold Type: " << holdType;
-    std::cout << "\nHold Size: " << holdSize;
-    std::cout << "\nHold Height: " << holdHeight;
-    std::cout << std::endl;
-}
-
-void BoulderProblem::Hold::printHoldInfo_()     // new function
-{
     std::cout << "Hold Type: " << this->holdType;
     std::cout << "\nHold Size: " << this->holdSize;
     std::cout << "\nHold Height: " << this->holdHeight;
@@ -165,11 +157,6 @@ struct TopRopeRoute
 };
 
 void TopRopeRoute::RouteGrade::printGradeInfo()
-{
-    std::cout << "Grade is: " << gradeNumber << gradeLetter << std::endl;
-}
-
-void TopRopeRoute::RouteGrade::printGradeInfo_()    // new function
 {
     std::cout << "Grade is: " << this->gradeNumber << this->gradeLetter << std::endl;
 }
@@ -265,13 +252,8 @@ struct Shoe
 };
 
 void Shoe::shoeInfo()
-{
-    std::cout << "This size " << shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << rubberType << " rubber.\n";
-}
-
-void Shoe::shoeInfo_()  // new function
-{
-        std::cout << "This size " << this->shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << this->rubberType << " rubber.\n";
+{        
+     std::cout << "This size " << this->shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << this->rubberType << " rubber.\n";
         std::cout << "The aggressiveness is " << this->agressiveness << std::endl;
 }
 
@@ -325,7 +307,7 @@ struct ClimbPlan
 
 void divider()
 {
-std::cout << "\n=============================\n\n";
+    std::cout << "\n=============================\n\n";
 }
 
 int main()
@@ -344,7 +326,7 @@ int main()
     std::cout << "\nHold Height: " << pinch.holdHeight;
     std::cout << std::endl;
 
-    pinch.printHoldInfo_();
+    pinch.printHoldInfo();
 
     divider();
 
@@ -352,7 +334,7 @@ int main()
 
     std::cout << "Grade of this medium Top Rope Route is: " << medium.gradeNumber << medium.gradeLetter << std::endl;
 
-    medium.printGradeInfo_();
+    medium.printGradeInfo();
 
     divider();
 
@@ -370,7 +352,7 @@ int main()
     std::cout << "This size " << tenaya.shoeSize << ( tenaya.isBoot ? " boot" : " shoe" ) << " has type " << tenaya.rubberType << " rubber.\n";
     std::cout << "It's got an aggressiveness value of " << tenaya.agressiveness << ".\n";
 
-    tenaya.shoeInfo_();
+    tenaya.shoeInfo();
 
     divider();
 
