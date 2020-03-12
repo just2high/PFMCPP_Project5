@@ -37,8 +37,8 @@ send me a DM to check your pull request
 
 
 
-
-
+#include "LeakedObjectDetector.h"
+#include <iostream>
 #include <math.h>
 //Required UDT for Copied UDT 1 to work
 
@@ -67,13 +67,15 @@ struct BoulderProblem
 
         void printHoldInfo();
 
-        void printHoldInfo_();     // new function
+        JUCE_LEAK_DETECTOR(Hold)
     };
 
     double calculateDifficulty( double ropeLength );
     void difficultyInfo();
 
     Hold crimp;
+    
+    JUCE_LEAK_DETECTOR( BoulderProblem )
 };
 
 void BoulderProblem::Hold::printHoldInfo()
@@ -94,6 +96,28 @@ void BoulderProblem::difficultyInfo()     // new function
 {
     std::cout << "The grade is V" << this->problemGrade << " and the wall angle is at a " << this->wallAngle << " degree incline.\n";
 }
+
+struct BoulderProblemWrapper
+{
+    BoulderProblemWrapper( BoulderProblem* ptr ) : pointerToBoulderProblem( ptr ) {}
+    ~BoulderProblemWrapper()
+    {
+        delete pointerToBoulderProblem;
+    }
+
+    BoulderProblem* pointerToBoulderProblem = nullptr;
+};
+
+struct HoldWrapper     // Did I declare this wrong?
+{
+    HoldWrapper( BoulderProblem::Hold* ptr ) : pointerToHold( ptr ) {}
+    ~HoldWrapper()
+    {
+        delete pointerToHold;
+    }
+
+    BoulderProblem::Hold* pointerToHold = nullptr;
+};
 
 /*
  copied UDT 1:
@@ -125,12 +149,15 @@ struct TopRopeRoute
         }
 
         void printGradeInfo();
-        void printGradeInfo_();     // new function
+
+        JUCE_LEAK_DETECTOR(RouteGrade)
     };
 
     void buildRoute( int moves, double wallHeight );
 
     RouteGrade hard;
+
+    JUCE_LEAK_DETECTOR(TopRopeRoute)
 };
 
 void TopRopeRoute::RouteGrade::printGradeInfo()
@@ -150,6 +177,28 @@ void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
          std::cout << "Hold height for move " << i << " is: " << hold.holdHeight << std::endl;
     }
 }
+
+struct TopRopeRouteWrapper
+{
+    TopRopeRouteWrapper( TopRopeRoute* ptr ) : pointerToTopRopeRoute( ptr ) {}
+    ~TopRopeRouteWrapper()
+    {
+        delete pointerToTopRopeRoute;
+    }
+
+    TopRopeRoute* pointerToTopRopeRoute = nullptr;
+};
+
+struct RouteGradeWrapper
+{
+    RouteGradeWrapper( TopRopeRoute::RouteGrade* ptr ) : pointerToRouteGrade( ptr ) {}
+    ~RouteGradeWrapper()
+    {
+        delete pointerToRouteGrade;
+    }
+
+    TopRopeRoute::RouteGrade* pointerToRouteGrade = nullptr;
+};
 
 /*
  copied UDT 2:
@@ -171,6 +220,8 @@ struct Mountain
     void mountainFeatures( TopRopeRoute face, BoulderProblem base, double mountain );
 
     void constructMountain( double baseDiameter );
+
+    JUCE_LEAK_DETECTOR(Mountain)
 };
 
 void Mountain::mountainFeatures(TopRopeRoute face, BoulderProblem base, double mountain )
@@ -202,6 +253,17 @@ void Mountain::constructMountain( double baseDiameter )
 //    mountainFeatures( wall, slab, mountain ); 
 }
 
+struct MountainWrapper
+{
+    MountainWrapper( Mountain* ptr ) : pointerToMountain( ptr ) {}
+    ~MountainWrapper()
+    {
+        delete pointerToMountain;
+    }
+
+    Mountain* pointerToMountain = nullptr;
+};
+
 /*
  copied UDT 3:
  */
@@ -226,6 +288,8 @@ struct Shoe
     void shoeInfo_();   // new function
 
     bool shoeFit( float painTolerance );
+
+    JUCE_LEAK_DETECTOR(Shoe)
 };
 
 void Shoe::shoeInfo()
@@ -248,6 +312,17 @@ bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
     return true;
 }
 
+struct ShoeWrapper
+{
+    ShoeWrapper( Shoe* ptr ) : pointerToShoe( ptr ) {}
+    ~ShoeWrapper()
+    {
+        delete pointerToShoe;
+    }
+
+    Shoe* pointerToShoe = nullptr;
+};
+
 /*
  new UDT 4:
  */
@@ -263,6 +338,19 @@ struct TripPlan
         std::cout << "Trip planned!\n";
         mountain.constructMountain( 34.27 );
     }
+
+    JUCE_LEAK_DETECTOR(TripPlan)
+};
+
+struct TripPlanWrapper
+{
+    TripPlanWrapper( TripPlan* ptr ) : pointerToTripPlan( ptr ) {}
+    ~TripPlanWrapper()
+    {
+        delete pointerToTripPlan;
+    }
+
+    TripPlan* pointerToTripPlan = nullptr;
 };
 
 /*
@@ -280,6 +368,19 @@ struct ClimbPlan
         shoe.shoeInfo();
         std::cout << "Got my shoes for the climb!\n";
     }
+
+    JUCE_LEAK_DETECTOR(ClimbPlan)
+};
+
+struct ClimbPlanWrapper
+{
+    ClimbPlanWrapper( ClimbPlan* ptr ) : pointerToClimbPlan( ptr ) {}
+    ~ClimbPlanWrapper()
+    {
+        delete pointerToClimbPlan;
+    }
+
+    ClimbPlan* pointerToClimbPlan = nullptr;
 };
 
 void divider()
@@ -289,47 +390,47 @@ void divider()
 
 int main()
 {
-    TripPlan march;
+    TripPlanWrapper march ( new TripPlan() );
 
-    ClimbPlan routeOne;
+    ClimbPlanWrapper routeOne ( new ClimbPlan() );
 
     divider();
-
-    BoulderProblem::Hold pinch;
     
+    HoldWrapper pinch ( new BoulderProblem::Hold() );
+
     std::cout << "Accessing member variables of pinch hold...\n";
-    std::cout << "Hold Type: " << pinch.holdType;
-    std::cout << "\nHold Size: " << pinch.holdSize;
-    std::cout << "\nHold Height: " << pinch.holdHeight;
+    std::cout << "Hold Type: " << pinch.pointerToHold->holdType;
+    std::cout << "\nHold Size: " << pinch.pointerToHold->holdSize;
+    std::cout << "\nHold Height: " << pinch.pointerToHold->holdHeight;
     std::cout << std::endl;
 
-    pinch.printHoldInfo();
+    pinch.pointerToHold->printHoldInfo();
 
     divider();
 
-    TopRopeRoute::RouteGrade medium;
+    RouteGradeWrapper medium ( new TopRopeRoute::RouteGrade () );
 
-    std::cout << "Grade of this medium Top Rope Route is: " << medium.gradeNumber << medium.gradeLetter << std::endl;
+    std::cout << "Grade of this medium Top Rope Route is: " << medium.pointerToRouteGrade->gradeNumber << medium.pointerToRouteGrade->gradeLetter << std::endl;
 
-    medium.printGradeInfo();
+    medium.pointerToRouteGrade->printGradeInfo();
 
     divider();
-
-    Mountain Jumbo;
     
-    std::cout << "Mount Jumbo has a height of " << Jumbo.height << " feet and has " << Jumbo.routes << " routes\n";
+    MountainWrapper jumbo ( new Mountain () );
 
-    Jumbo.printMountainInfo();
+    std::cout << "Mount Jumbo has a height of " << jumbo.pointerToMountain->height << " feet and has " << jumbo.pointerToMountain->routes << " routes\n";
+
+    jumbo.pointerToMountain->printMountainInfo();
 
     divider();
 
-    Shoe tenaya;
+    ShoeWrapper tenaya ( new Shoe () );
 
     std::cout << "Tenaya is a great shoe.\n";
-    std::cout << "This size " << tenaya.shoeSize << ( tenaya.isBoot ? " boot" : " shoe" ) << " has type " << tenaya.rubberType << " rubber.\n";
-    std::cout << "It's got an aggressiveness value of " << tenaya.agressiveness << ".\n";
+    std::cout << "This size " << tenaya.pointerToShoe->shoeSize << ( tenaya.pointerToShoe->isBoot ? " boot" : " shoe" ) << " has type " << tenaya.pointerToShoe->rubberType << " rubber.\n";
+    std::cout << "It's got an aggressiveness value of " << tenaya.pointerToShoe->agressiveness << ".\n";
 
-    tenaya.shoeInfo();
+    tenaya.pointerToShoe->shoeInfo();
 
     divider();
 
