@@ -1,35 +1,11 @@
 #pragma once
 #include "LeakedObjectDetector.h"
-// #include "Hold.cpp"
-
-/*
-struct BoulderProblem
-{
-    int problemGrade;
-    double wallAngle;
-    
-    struct Hold;
-
-    double calculateDifficulty( double ropeLength );
-    void difficultyInfo();
-
-    Hold crimp;
-    
-    JUCE_LEAK_DETECTOR( BoulderProblem )
-};
-*/
 
 struct BoulderProblem
 {
     int problemGrade;
     double wallAngle;
     
-    BoulderProblem() : problemGrade( 3 ), wallAngle( 30 ) {}
-    ~BoulderProblem() 
-    {
-        std::cout << "BoulderProblem dstor\n";
-    }
-
     struct Hold
     {
         int holdType { 2 };

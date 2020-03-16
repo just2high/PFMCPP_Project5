@@ -41,88 +41,9 @@ send me a DM to check your pull request
 #include "LeakedObjectDetector.h"
 #include <iostream>
 #include <math.h>
-#include "BoulderProblem.cpp"
+#include "BoulderProblem.h"
 #include "Wrappers.h"
 
-//Required UDT for Copied UDT 1 to work
-/*
-struct BoulderProblem
-{
-    int problemGrade;
-    double wallAngle;
-    
-    BoulderProblem() : problemGrade( 3 ), wallAngle( 30 ) {}
-    ~BoulderProblem() 
-    {
-        std::cout << "BoulderProblem dstor\n";
-    }
-
-    struct Hold
-    {
-        int holdType { 2 };
-        double holdSize; 
-        double holdHeight;
-
-        Hold() : holdSize( 0.8 ), holdHeight( 1 ) {}
-        ~Hold() 
-        {
-            std::cout << "Hold dstor\n";
-        }
-
-        void printHoldInfo();
-
-        JUCE_LEAK_DETECTOR(Hold)
-    };
-
-    double calculateDifficulty( double ropeLength );
-    void difficultyInfo();
-
-    Hold crimp;
-    
-    JUCE_LEAK_DETECTOR( BoulderProblem )
-};
-
-void BoulderProblem::Hold::printHoldInfo()
-{
-    std::cout << "Hold Type: " << this->holdType;
-    std::cout << "\nHold Size: " << this->holdSize;
-    std::cout << "\nHold Height: " << this->holdHeight;
-    std::cout << std::endl;
-}
-
-double BoulderProblem::calculateDifficulty( double ropeLength )
-{
-    std::cout << "Calculating difficulty for V" << problemGrade << " problem at a " << wallAngle << " degree incline.\n";
-    return ((problemGrade * crimp.holdType) / crimp.holdSize) - ropeLength;
-}
-
-void BoulderProblem::difficultyInfo()     // new function
-{
-    std::cout << "The grade is V" << this->problemGrade << " and the wall angle is at a " << this->wallAngle << " degree incline.\n";
-}
-
-struct BoulderProblemWrapper
-{
-    BoulderProblemWrapper( BoulderProblem* ptr ) : pointerToBoulderProblem( ptr ) {}
-    ~BoulderProblemWrapper()
-    {
-        delete pointerToBoulderProblem;
-    }
-
-    BoulderProblem* pointerToBoulderProblem = nullptr;
-};
-
-struct HoldWrapper     // Did I declare this wrong?
-{
-    HoldWrapper( BoulderProblem::Hold* ptr ) : pointerToHold( ptr ) {}
-    ~HoldWrapper()
-    {
-        delete pointerToHold;
-    }
-
-    BoulderProblem::Hold* pointerToHold = nullptr;
-};
-*/
 /*
  copied UDT 1:
  */
