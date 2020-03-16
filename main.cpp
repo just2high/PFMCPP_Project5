@@ -41,8 +41,11 @@ send me a DM to check your pull request
 #include "LeakedObjectDetector.h"
 #include <iostream>
 #include <math.h>
-//Required UDT for Copied UDT 1 to work
+#include "BoulderProblem.cpp"
+#include "Wrappers.h"
 
+//Required UDT for Copied UDT 1 to work
+/*
 struct BoulderProblem
 {
     int problemGrade;
@@ -119,7 +122,7 @@ struct HoldWrapper     // Did I declare this wrong?
 
     BoulderProblem::Hold* pointerToHold = nullptr;
 };
-
+*/
 /*
  copied UDT 1:
  */
