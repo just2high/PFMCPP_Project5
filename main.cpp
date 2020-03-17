@@ -42,88 +42,8 @@ send me a DM to check your pull request
 #include <iostream>
 #include <math.h>
 #include "BoulderProblem.h"
+#include "TopRoupeRoute.h"
 #include "Wrappers.h"
-
-/*
- copied UDT 1:
- */
-
-struct TopRopeRoute
-{
-    double wallAngle { 10 };
-
-    TopRopeRoute(){}
-    ~TopRopeRoute()
-    {
-        std::cout << "TopRopeRoute dstor\n";
-    }
-
-    struct RouteGrade
-    {
-        double gradeNumber;
-        char gradeLetter; 
-        
-        RouteGrade() : 
-        gradeNumber( 5.10 ), 
-        gradeLetter( 'd' )
-        {}
-
-        ~RouteGrade()
-        {
-            std::cout << "RouteGrade dstor\n";
-        }
-
-        void printGradeInfo();
-
-        JUCE_LEAK_DETECTOR(RouteGrade)
-    };
-
-    void buildRoute( int moves, double wallHeight );
-
-    RouteGrade hard;
-
-    JUCE_LEAK_DETECTOR(TopRopeRoute)
-};
-
-void TopRopeRoute::RouteGrade::printGradeInfo()
-{
-    std::cout << "Grade is: " << this->gradeNumber << this->gradeLetter << std::endl;
-}
-
-void TopRopeRoute::buildRoute( int moves, double wallHeight = 40.36 )
-{
-    BoulderProblem::Hold hold;
-
-    std::cout << "The wall is at a " << wallAngle << " degree incline.\n";
-
-    for ( int i = moves; i > 0; --i )  // already have a for loop
-    {
-         hold.holdHeight = ( wallHeight / moves ) * i;
-         std::cout << "Hold height for move " << i << " is: " << hold.holdHeight << std::endl;
-    }
-}
-
-struct TopRopeRouteWrapper
-{
-    TopRopeRouteWrapper( TopRopeRoute* ptr ) : pointerToTopRopeRoute( ptr ) {}
-    ~TopRopeRouteWrapper()
-    {
-        delete pointerToTopRopeRoute;
-    }
-
-    TopRopeRoute* pointerToTopRopeRoute = nullptr;
-};
-
-struct RouteGradeWrapper
-{
-    RouteGradeWrapper( TopRopeRoute::RouteGrade* ptr ) : pointerToRouteGrade( ptr ) {}
-    ~RouteGradeWrapper()
-    {
-        delete pointerToRouteGrade;
-    }
-
-    TopRopeRoute::RouteGrade* pointerToRouteGrade = nullptr;
-};
 
 /*
  copied UDT 2:

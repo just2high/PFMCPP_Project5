@@ -6,17 +6,17 @@ struct BoulderProblem
     int problemGrade;
     double wallAngle;
     
+    BoulderProblem();
+    ~BoulderProblem();
+    
     struct Hold
     {
         int holdType { 2 };
         double holdSize; 
         double holdHeight;
 
-        Hold() : holdSize( 0.8 ), holdHeight( 1 ) {}
-        ~Hold() 
-        {
-            std::cout << "Hold dstor\n";
-        }
+        Hold();
+        ~Hold();
 
         void printHoldInfo();
 
