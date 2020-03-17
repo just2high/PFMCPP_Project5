@@ -1,3 +1,4 @@
+#include "BoulderProblem.h"
 #include "TopRopeRoute.h"
 
 TopRopeRoute::TopRopeRoute(){}

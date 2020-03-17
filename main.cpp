@@ -42,72 +42,9 @@ send me a DM to check your pull request
 #include <iostream>
 #include <math.h>
 #include "BoulderProblem.h"
-#include "TopRoupeRoute.h"
+#include "TopRopeRoute.h"
+#include "Mountain.h"
 #include "Wrappers.h"
-
-/*
- copied UDT 2:
- */
-
-struct Mountain 
-{
-    int height { 15 };
-    int routes { 20 };
-
-    Mountain(){}
-    ~Mountain()
-    {
-        std::cout << "Mountain dstor\n";
-    }
-
-    void printMountainInfo();     // new function
-
-    void mountainFeatures( TopRopeRoute face, BoulderProblem base, double mountain );
-
-    void constructMountain( double baseDiameter );
-
-    JUCE_LEAK_DETECTOR(Mountain)
-};
-
-void Mountain::mountainFeatures(TopRopeRoute face, BoulderProblem base, double mountain )
-{
-    std::cout << "Mountain height is " << height << " feet and has " << routes << " routes\n";
-
-    for ( int i = this->routes; i > 0; --i ) // already have a for loop
-    {
-        std::cout << "Route #" << i << std::endl;
-        
-        face.buildRoute( this->height, ( mountain + base.calculateDifficulty( 20.25 ) ) );
-    }
-}
-
-void Mountain::printMountainInfo()  // new function
-{
-    std::cout << "Mountain height is " << this->height << " feet and has " << this->routes << " routes\n";
-}
-
-void Mountain::constructMountain( double baseDiameter )
-{
-    TopRopeRoute wall;
-    BoulderProblem slab;
-
-    double mountain = M_PI* pow( baseDiameter / 2, 2 ) * this->height;
-
-    std::cout << "The mountain takes up " << mountain << " ft^3 of space.\n";
-
-//    mountainFeatures( wall, slab, mountain ); 
-}
-
-struct MountainWrapper
-{
-    MountainWrapper( Mountain* ptr ) : pointerToMountain( ptr ) {}
-    ~MountainWrapper()
-    {
-        delete pointerToMountain;
-    }
-
-    Mountain* pointerToMountain = nullptr;
-};
 
 /*
  copied UDT 3:

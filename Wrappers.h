@@ -1,3 +1,4 @@
+
 struct BoulderProblemWrapper
 {
     BoulderProblemWrapper( BoulderProblem* ptr ) : pointerToBoulderProblem( ptr ) {}
@@ -9,7 +10,7 @@ struct BoulderProblemWrapper
     BoulderProblem* pointerToBoulderProblem = nullptr;
 };
 
-struct HoldWrapper     // Did I declare this wrong?
+struct HoldWrapper
 {
     HoldWrapper( BoulderProblem::Hold* ptr ) : pointerToHold( ptr ) {}
     ~HoldWrapper()
@@ -40,4 +41,15 @@ struct RouteGradeWrapper
     }
 
     TopRopeRoute::RouteGrade* pointerToRouteGrade = nullptr;
+};
+
+struct MountainWrapper
+{
+    MountainWrapper( Mountain* ptr ) : pointerToMountain( ptr ) {}
+    ~MountainWrapper()
+    {
+        delete pointerToMountain;
+    }
+
+    Mountain* pointerToMountain = nullptr;
 };
