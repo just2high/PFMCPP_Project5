@@ -44,96 +44,9 @@ send me a DM to check your pull request
 #include "BoulderProblem.h"
 #include "TopRopeRoute.h"
 #include "Mountain.h"
+#include "Shoe.h"
+#include "TripPlan.h"
 #include "Wrappers.h"
-
-/*
- copied UDT 3:
- */
-
-struct Shoe
-{
-    float shoeSize;
-    bool isMale;
-    bool isBoot;
-    int rubberType;
-    int agressiveness;
-
-    Shoe() : shoeSize( 8.5f ), isMale ( true ), isBoot ( false ), rubberType ( 3 ), agressiveness ( 1 ) {}
-
-    ~Shoe()
-    {
-        std::cout << "Shoe dstor\n";
-    }
-
-    void shoeInfo();
-
-    void shoeInfo_();   // new function
-
-    bool shoeFit( float painTolerance );
-
-    JUCE_LEAK_DETECTOR(Shoe)
-};
-
-void Shoe::shoeInfo()
-{        
-     std::cout << "This size " << this->shoeSize << ( isBoot ? " boot" : " shoe" ) << " has type " << this->rubberType << " rubber.\n";
-        std::cout << "The aggressiveness is " << this->agressiveness << std::endl;
-}
-
-bool Shoe::shoeFit( float painTolerance ) // modified to become while loop
-{    
-    while ( painTolerance <= shoeSize )
-    {
-        std::cout << "The size " << shoeSize << " shoe doesn't fit!\n";
-
-        shoeSize = shoeSize - 0.5f;
-    }
-
-    std::cout << "The size " << shoeSize << " shoe fits!\n";
-
-    return true;
-}
-
-struct ShoeWrapper
-{
-    ShoeWrapper( Shoe* ptr ) : pointerToShoe( ptr ) {}
-    ~ShoeWrapper()
-    {
-        delete pointerToShoe;
-    }
-
-    Shoe* pointerToShoe = nullptr;
-};
-
-/*
- new UDT 4:
- */
-
-struct TripPlan
-{
-    TopRopeRoute routeOne;
-    Mountain mountain;
-
-    TripPlan() {}
-    ~TripPlan()
-    {
-        std::cout << "Trip planned!\n";
-        mountain.constructMountain( 34.27 );
-    }
-
-    JUCE_LEAK_DETECTOR(TripPlan)
-};
-
-struct TripPlanWrapper
-{
-    TripPlanWrapper( TripPlan* ptr ) : pointerToTripPlan( ptr ) {}
-    ~TripPlanWrapper()
-    {
-        delete pointerToTripPlan;
-    }
-
-    TripPlan* pointerToTripPlan = nullptr;
-};
 
 /*
  new UDT 5:

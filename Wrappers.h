@@ -53,3 +53,25 @@ struct MountainWrapper
 
     Mountain* pointerToMountain = nullptr;
 };
+
+struct ShoeWrapper
+{
+    ShoeWrapper( Shoe* ptr ) : pointerToShoe( ptr ) {}
+    ~ShoeWrapper()
+    {
+        delete pointerToShoe;
+    }
+
+    Shoe* pointerToShoe = nullptr;
+};
+
+struct TripPlanWrapper
+{
+    TripPlanWrapper( TripPlan* ptr ) : pointerToTripPlan( ptr ) {}
+    ~TripPlanWrapper()
+    {
+        delete pointerToTripPlan;
+    }
+
+    TripPlan* pointerToTripPlan = nullptr;
+};
