@@ -75,3 +75,14 @@ struct TripPlanWrapper
 
     TripPlan* pointerToTripPlan = nullptr;
 };
+
+struct ClimbPlanWrapper
+{
+    ClimbPlanWrapper( ClimbPlan* ptr ) : pointerToClimbPlan( ptr ) {}
+    ~ClimbPlanWrapper()
+    {
+        delete pointerToClimbPlan;
+    }
+
+    ClimbPlan* pointerToClimbPlan = nullptr;
+};

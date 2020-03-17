@@ -46,37 +46,8 @@ send me a DM to check your pull request
 #include "Mountain.h"
 #include "Shoe.h"
 #include "TripPlan.h"
+#include "ClimbPlan.h"
 #include "Wrappers.h"
-
-/*
- new UDT 5:
- */
-
-struct ClimbPlan
-{
-    TopRopeRoute routeOne;
-    Shoe shoe;
-
-    ClimbPlan() {}
-    ~ClimbPlan()
-    {
-        shoe.shoeInfo();
-        std::cout << "Got my shoes for the climb!\n";
-    }
-
-    JUCE_LEAK_DETECTOR(ClimbPlan)
-};
-
-struct ClimbPlanWrapper
-{
-    ClimbPlanWrapper( ClimbPlan* ptr ) : pointerToClimbPlan( ptr ) {}
-    ~ClimbPlanWrapper()
-    {
-        delete pointerToClimbPlan;
-    }
-
-    ClimbPlan* pointerToClimbPlan = nullptr;
-};
 
 void divider()
 {
