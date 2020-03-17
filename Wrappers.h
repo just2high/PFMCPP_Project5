@@ -1,9 +1,14 @@
+#pragma once
 #include "BoulderProblem.h" //need to include because of nested class
 #include "TopRopeRoute.h"
-struct Mountain;
+
+// need to include because class owns instances of other objects
+#include "Mountain.h"  
+#include "TripPlan.h"
+#include "ClimbPlan.h"
+
+// Forward Declaration
 struct Shoe;
-struct TripPlan;
-struct ClimbPlan;
 
 struct BoulderProblemWrapper
 {
