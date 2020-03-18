@@ -1,4 +1,9 @@
+#pragma once
 #include "Wrappers.h"
+#include "Mountain.h"  
+#include "TripPlan.h"
+#include "ClimbPlan.h"
+
 
 BoulderProblemWrapper::BoulderProblemWrapper( BoulderProblem* ptr ) : pointerToBoulderProblem( ptr ) {}
 BoulderProblemWrapper::~BoulderProblemWrapper()

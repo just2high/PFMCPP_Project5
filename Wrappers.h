@@ -2,12 +2,10 @@
 #include "BoulderProblem.h" //need to include because of nested class
 #include "TopRopeRoute.h"
 
-// need to include because class owns instances of other objects
-#include "Mountain.h"  
-#include "TripPlan.h"
-#include "ClimbPlan.h"
-
 // Forward Declaration
+struct Mountain;
+struct TripPlan;
+struct ClimbPlan;
 struct Shoe;
 
 struct BoulderProblemWrapper
