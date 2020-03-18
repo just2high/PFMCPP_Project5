@@ -1,4 +1,3 @@
-#pragma once
 #include "Wrappers.h"
 #include "Mountain.h"  
 #include "TripPlan.h"
